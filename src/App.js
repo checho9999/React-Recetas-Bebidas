@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Header from './components/Header'
 import Formulario from './components/Formulario'
+import CategoriasProvider from './context/CategoriasContext'
 
 function App() {
   return (
-    <Fragment>
+    <CategoriasProvider>
 
       <Header />
 
@@ -14,7 +15,7 @@ function App() {
         </div>
       </div>    
     
-    </Fragment>
+    </CategoriasProvider>
   );
 }
 
