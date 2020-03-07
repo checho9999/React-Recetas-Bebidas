@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { CategoriasContext } from '../context/CategoriasContext'
+import { RecetasContext } from '../context/RecetasContext'
 
 const Formulario = () => {
 
@@ -9,11 +10,14 @@ const Formulario = () => {
         categoria: ''
     })
 
-    //Accedemos al Provider
+    //Accedemos al Provider de Categorias
     const { categorias } = useContext(CategoriasContext);
     //console.log(categorias);
 
-    //Actulizamos el state en base a lo ingresado desde el input por el usuario
+    //Accedemos al Provider de Recetas
+    const { buscarRecetas, guardarConsultar } = useContext(RecetasContext);
+
+    //Actualizamos el state en base a lo ingresado desde el input por el usuario
     const obtenerDatosReceta = e => {
         guardarBusqueda({
             ...busqueda,
@@ -24,11 +28,30 @@ const Formulario = () => {
     return ( 
         <form
             className="col-12"
+            onSubmit={ e => {
+                //para que no se envie el query string en la parte superior, ni se recarge la pagina
+                e.preventDefault();
+                
+                //esto lo agregue yo, para que no tire error cuando lista las recetas al no haber categoria
+                //validando la categoria del input
+                if(busqueda.categoria.trim() === ''){
+                    //Seteamos a false, ya que no paso la validacion
+                    guardarConsultar(false);
+                    return;
+                }              
+
+                //Reseteamos el valor a true, porque los datos estaban completos                
+                guardarConsultar(true);
+
+                //Actualizamos en el state del context el input validado
+                buscarRecetas(busqueda);                
+                    
+            }}
         >
             <fieldset className="text-center">
                 <legend>Busca bebidas por Categoría o Ingrediente</legend>
             </fieldset>
-
+            
             <div className="row mt-4">
                 <div className="col-md-4">
                     <input
