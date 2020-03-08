@@ -34,9 +34,10 @@ const Formulario = () => {
                 
                 //esto lo agregue yo, para que no tire error cuando lista las recetas al no haber categoria
                 //validando la categoria del input
-                if(busqueda.categoria.trim() === ''){
+                if (busqueda.categoria.trim() === ''){
                     //Seteamos a false, ya que no paso la validacion
                     guardarConsultar(false);
+
                     return;
                 }              
 
@@ -44,7 +45,7 @@ const Formulario = () => {
                 guardarConsultar(true);
 
                 //Actualizamos en el state del context el input validado
-                buscarRecetas(busqueda);                
+                buscarRecetas(busqueda);             
                     
             }}
         >

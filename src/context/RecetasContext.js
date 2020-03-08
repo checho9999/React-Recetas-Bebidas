@@ -22,10 +22,14 @@ const RecetasProvider = ( props ) => {
     //Extraemos los datos del criterio de busqueda del usuario obtenimos desde el input del Formulario
     const { nombre, categoria } = busqueda;
 
+    //Definimos y ejecutamos el llamado a la API 
     useEffect(() => {
 
         //Realizamos la busqueda solo si se submitio el Formulario
         if (consultar) {
+
+            //Esto lo agrego yo...Reseteamos el valor a false porque ya se mando la busqueda desde el formulario
+            guardarConsultar(false);
 
             const obtenerRecetas = async () => {
 
@@ -43,7 +47,7 @@ const RecetasProvider = ( props ) => {
             obtenerRecetas();
         }
 
-    }, [ busqueda ]);
+    }, [ busqueda, categoria, consultar, nombre ]); //categoria, consultar y nombre los agregue por warning
 
     return ( 
         <RecetasContext.Provider
@@ -57,5 +61,5 @@ const RecetasProvider = ( props ) => {
         </RecetasContext.Provider>
      );
 }
- 
+
 export default RecetasProvider;

@@ -8,8 +8,7 @@ const ListaRecetas = () => {
     const { recetas } = useContext(RecetasContext);
 
     // si el objeto llega vacio no se ejecuta nada
-    if(Object.keys(recetas).length === 0 ) return null;
-
+    if (Object.keys(recetas).length === 0 ) return null;
     //console.log(recetas);
 
     return ( 
@@ -23,5 +22,5 @@ const ListaRecetas = () => {
         </div>
      );
 }
- 
+
 export default ListaRecetas;
